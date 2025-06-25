@@ -11,7 +11,9 @@ A modern web application for audio transcription using OpenAI's Whisper v3 model
 - 🎵 **Audio Transcription** - Support for MP3, WAV, M4A, and more audio formats
 - 🌍 **Multi-language Support** - Auto-detect or specify language
 - 📝 **Custom Naming** - Name your transcriptions for easy reference
+- 💾 **Persistent Storage** - SQLite for local, Supabase for cloud deployment
 - 🔍 **Search History** - Search through transcription names and content
+- 📊 **Database Support** - Saves all transcriptions permanently
 - 💾 **Export Options** - Download individual transcriptions or export full history
 - 🎨 **Modern UI** - Clean, Tailwind-inspired interface
 - 🔐 **Secure** - API keys stored in environment variables
@@ -41,9 +43,13 @@ A modern web application for audio transcription using OpenAI's Whisper v3 model
    # Edit .env and add your OpenAI API key
    ```
 
-4. **Run the app:**
+4. **Choose your version and run:**
    ```bash
+   # For local development with SQLite database:
    streamlit run transcription_app.py
+   
+   # For cloud deployment with Supabase support:
+   streamlit run transcription_app_cloud.py
    ```
 
 5. **Open in browser:**
@@ -51,12 +57,12 @@ A modern web application for audio transcription using OpenAI's Whisper v3 model
 
 ## 🌐 Deploy Online
 
-See [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md) for detailed instructions on deploying to:
-- Streamlit Community Cloud (FREE)
-- Heroku
-- Railway
-- Render
-- Google Cloud Run
+- See [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md) for deployment instructions
+- See [DATABASE_SETUP.md](DATABASE_SETUP.md) for database configuration
+
+Deployment options include:
+- Streamlit Community Cloud (FREE) - with optional Supabase
+- Heroku, Railway, Render, Google Cloud Run
 
 ## 📖 Usage
 
@@ -65,6 +71,8 @@ See [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md) for detailed instructions on depl
 3. **Configure Options** - Set custom name and language (optional)
 4. **Transcribe** - Click the transcribe button
 5. **View & Export** - View results and download transcriptions
+6. **History** - All transcriptions are saved to database automatically
+7. **Search** - Find past transcriptions by name or content
 
 ## 💰 Costs
 
@@ -75,18 +83,23 @@ See [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md) for detailed instructions on depl
 
 - API keys are stored in environment variables
 - Never commit `.env` files to version control
-- Consider adding authentication for production deployments
+- SQLite database is stored locally (not committed to git)
+- Supabase uses secure authentication
+- Consider adding user authentication for production deployments
 
 ## 📁 Project Structure
 
 ```
 whisper-transcription-app/
-├── transcription_app.py    # Main Streamlit application
-├── requirements.txt        # Python dependencies
-├── .env.example           # Example environment variables
-├── .gitignore            # Git ignore file
-├── README.md             # This file
-└── DEPLOYMENT_GUIDE.md   # Deployment instructions
+├── transcription_app.py       # Main app with SQLite (local)
+├── transcription_app_cloud.py # Cloud version with Supabase
+├── requirements.txt           # Python dependencies
+├── .env.example              # Example environment variables
+├── .gitignore               # Git ignore file
+├── README.md                # This file
+├── DATABASE_SETUP.md        # Database configuration guide
+├── DEPLOYMENT_GUIDE.md      # Deployment instructions
+└── transcriptions.db        # SQLite database (created automatically)
 ```
 
 ## 🤝 Contributing
