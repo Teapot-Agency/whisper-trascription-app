@@ -44,6 +44,8 @@ CREATE TABLE transcriptions (
     date TEXT NOT NULL,
     text TEXT NOT NULL,
     language TEXT,
+    improved_text TEXT,  -- Added for GPT-4o-mini transcript improvement
+    output_format TEXT DEFAULT 'text',  -- Added for SRT subtitle support
     created_at TIMESTAMP DEFAULT NOW()
 );
 
@@ -53,6 +55,16 @@ ALTER TABLE transcriptions ENABLE ROW LEVEL SECURITY;
 -- Create a policy to allow all operations (adjust as needed)
 CREATE POLICY "Allow all operations" ON transcriptions
     FOR ALL USING (true);
+```
+
+#### 🔄 **For Existing Users: Update Schema**
+If you already have a `transcriptions` table, add the new columns:
+```sql
+-- Add improved_text column for GPT-4o-mini transcript improvement feature
+ALTER TABLE transcriptions ADD COLUMN improved_text TEXT;
+
+-- Add output_format column for SRT subtitle support
+ALTER TABLE transcriptions ADD COLUMN output_format TEXT DEFAULT 'text';
 ```
 
 ### Step 3: Get Your Credentials
