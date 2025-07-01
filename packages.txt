@@ -1,7 +1,1 @@
-streamlit
-openai
-python-dotenv
-supabase
-pydub
-ffmpeg-python
-audioop-lts
+ffmpeg
